@@ -1,12 +1,14 @@
 import { Router } from "express"
 import { checkSchema, validationResult, matchedData } from "express-validator"
 import { queryValidationSchema,createUserValidationSchama } from "../utils/validationSchamas.js"
-import { users } from '../data.js'
+import { users } from '../models/data.js'
 import { resolveUserById } from "../utils/middleWares.js"
 
 const router = Router()
 
 router.get('/api/users',checkSchema(queryValidationSchema),(req, res) => {
+    console.log(req.session)
+    console.log(req.sessionID)
     const {
         query: { filter, value }
     } = req

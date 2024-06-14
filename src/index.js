@@ -2,6 +2,7 @@ import express from 'express'
 import routes from './routes/entery.js'
 import cookieParser from 'cookie-parser'
 import session from 'express-session' 
+import passport from 'passport' 
 
 const app = express()
 
@@ -18,6 +19,8 @@ app.use(session({
     }
 }))
 
+app.use(passport.initialize())
+app.use(passport.session())
 app.use(routes); 
 
 const PORT = process.env.PORT || 3500
@@ -27,11 +30,13 @@ app.listen(PORT, () => {
 });
 
 app.get('/', (req, res) => {
-    console.log(req.session)
-    console.log(req.sessionID)
-    res.cookie('message', 'Welcome', {maxAge: 60000 * 60, signed: true})
+    //console.log(req.session)
+    //console.log(req.sessionID)
+    req.session.visited = true
+    //res.cookie('message', 'Welcome', {maxAge: 60000 * 60, signed: true})
     res.status(200).send('Welcome')
 })
+
 // Apply middleware (commented out for now)
 // app.use(LoggingMiddleWare);
 

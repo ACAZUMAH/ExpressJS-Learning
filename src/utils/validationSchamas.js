@@ -1,3 +1,5 @@
+import { isString } from "util";
+
 export const createUserValidationSchama = {
     username: {
         notEmpty: {
@@ -30,3 +32,19 @@ export const queryValidationSchema = {
         },
     }
 };
+
+export const loginValidationSchema = {
+    username: {
+        notEmpty: {
+            errorMessage: 'Username is required'
+        },
+        isString: {
+            errorMessage: 'Username must be a string'
+        }
+    },
+    password:{
+        notEmpty: {
+            errorMessage: 'Password is required'
+        }
+    }
+}
